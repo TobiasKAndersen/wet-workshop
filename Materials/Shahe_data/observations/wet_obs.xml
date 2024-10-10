@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../client/config.xsd">
+<!--Acknowledgements to BB (bolding-bruggeman.com) for the concept of .obs files and the way to process through Python-->  
+  <executable path="../gotm_release.exe"/>
+  <setup path="../output/"/>
+  <obspath path="../../../OBS/"/>
+  
+  <observations>
+    <variable station ="station1" source="./tempv.obs" modelpath="output.nc" modelvariable="temp" spinupyears = "5" error_pct = "0.2"/>
+    <variable station ="station1" source="./do.obs" modelpath="output.nc" modelvariable="abiotic_water_sO2W" spinupyears = "5" error_pct = "0.2"/>
+    <variable station ="station1" source="./chla.obs" modelpath="output.nc" modelvariable="wet_chla_calculator_result" spinupyears = "5" error_pct = "0.2"/>
+    <variable station ="station1" source="./no3.obs" modelpath="output.nc" modelvariable="abiotic_water_sNO3W" spinupyears = "5" error_pct = "0.2"/>
+    <variable station ="station1" source="./nh4.obs" modelpath="output.nc" modelvariable="abiotic_water_sNH4W" spinupyears = "5" error_pct = "0.2"/>
+    <variable station ="station1" source="./po4.obs" modelpath="output.nc" modelvariable="abiotic_water_sPO4W" spinupyears = "5" error_pct = "0.2"/>
+    <variable station ="station1" source="./tn.obs" modelpath="output.nc" modelvariable="wet_totN_calculator_result" spinupyears = "5" error_pct = "0.2"/>
+    <variable station ="station1" source="./tp.obs" modelpath="output.nc" modelvariable="wet_totP_calculator_result" spinupyears = "5" error_pct = "0.2"/>
+    <variable station ="station1" source="./cyano_chla.obs" modelpath="output.nc" modelvariable="cyanobacteria_oChla" spinupyears = "5" error_pct = "0.2"/>
+    <variable station ="station1" source="./diat_chla.obs" modelpath="output.nc" modelvariable="diatoms_oChla" spinupyears = "5" error_pct = "0.2"/>
+  </observations>
+</config>

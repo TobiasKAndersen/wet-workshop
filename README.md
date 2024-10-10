@@ -22,7 +22,11 @@ To run QWET you need to install QGIS3 64 bit version 3.16 or newer (available he
 
 **QWET**
 
-QWET is an open source QGIS plugin for application and user adaptation of the Water Ecosystems Tool (WET). The QWET installer and the QWET source code is available through here in the _Materials_ folder. The newest release of QWET (OCtober 2024, version 3.6) is compatible with the latest long term release of QGIS (version 3.34). Please read the download instructions and watch the associated video tutorial on how to download the software at: https://projects.au.dk/wet/resources
+QWET is an open source QGIS plugin for application and user adaptation of the Water Ecosystems Tool (WET). The QWET installer is available here:
+https://u.pcloud.link/publink/show?code=XZmiT30ZoYEwVCHw4Lu2u1lwUqExT7wdT1Dk 
+The newest release of QWET (OCtober 2024, version 3.6) is compatible with the latest long term release of QGIS (version 3.34). 
+Make sure that you have internet connection when installing QWET as QWET installs Python site packages on your QGIS python environment.
+To enable QWET in QGIS, select Plugins in the top menu in QGIS and select “Manage and Install Plugins”. Then, a pop-up window will appear, find QWET and tick of the box next to QWET. Now a QWET logo will appear QGIS panel. Enabling QWET is also demonstrated in the video tutorials.
 
 _GOTM-WET executables_
 

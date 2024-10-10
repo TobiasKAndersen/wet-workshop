@@ -1,0 +1,293 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../client/config.xsd">
+  <transports>
+    <transport type="sqlite" path="Lake_step5.db"/>
+  </transports>
+  <executable path="../gotm_release.exe"/>
+  <setup path="../"/>
+  <parameters>
+  <!-- all steps include plus/minus 40% of the default value, be cautious of sediment initialization values -->
+  <!-- STEP 1A: Calibration of physical dynamics - TEMPERATURE -->
+  <!-- BIOSHADE IN GOTM.YAML = FALSE -->
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  <!-- Physical parameters             -->
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->  
+  <!-- wind speed in West-East direction @ 10 m -->
+  <parameter file="gotm.yaml"   variable="surface/meteo/u10/scale_factor" minimum="0.75" maximum="1.0"/>
+  <!-- wind speed in North-South direction @ 10 m -->
+  <parameter file="gotm.yaml"   variable="surface/meteo/v10/scale_factor" minimum="0.75" maximum="1.0"/>
+  <!-- shortwave radiation -->
+  <parameter file="gotm.yaml"   variable="surface/meteo/swr/scale_factor" minimum="0.85" maximum="1.0"/>
+  <!-- cloud cover -->
+  <!-- <parameter file="gotm.yaml"   variable="surface/meteo/cloud/scale_factor" minimum="1.0" maximum="1.0"/> -->
+  <!-- minimum turbulent kinetic energy [m^2/s^2; min=0.0; default=1.00000000E-10] -->
+  <parameter file="gotm.yaml"   variable="turbulence/turb_param/k_min" minimum="1e-8" maximum="5e-7" logscale="True"/>
+  <!-- non-visible fraction of shortwave radiation [fraction; min=0.0; max=1.0; default=0.7] -->
+  <parameter file="gotm.yaml"   variable="light_extinction/A/constant_value" minimum="0.65" maximum="0.75"/>
+  <!-- e-folding depth of non-visible shortwave radiation [m; min=0.0; default=0.4] -->
+  <parameter file="gotm.yaml"   variable="light_extinction/g1/constant_value" minimum="0.30" maximum="0.4"/>
+  <!-- e-folding depth of visible shortwave radiation [m; min=0.0; default=8.0] -->
+  <parameter file="gotm.yaml"   variable="light_extinction/g2/constant_value" minimum="7.0" maximum="8.0"/>
+  
+  <!-- STEP 2: Calibration of oxygen profiles - focus on mineralization rate parameters -->
+  <!-- BIOSHADE IN GOTM.YAML = TRUE -->
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  <!-- Water column domain parameters  -->
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  <!-- kDMinPOMW :: decomposition constant of POM-DW at 20*C (1/d), default = 0.001 -->
+  <parameter file="fabm.yaml" maximum="0.05" minimum="0.01" variable="instances/abiotic_water/parameters/kDMinPOMW"/>
+  <!-- kDMinDOMW :: mineralization constant of DOM-DW at 20*C (1/d), default = 0.03 -->
+  <parameter file="fabm.yaml" maximum="0.05" minimum="0.01" variable="instances/abiotic_water/parameters/kDMinDOMW"/>
+  <!-- cThetaMinPOMW :: temperature coefficient of mineralization from POM to DOM (1/e^*C), default = 1.02 -->
+  <parameter file="fabm.yaml" maximum="1.07" minimum="1.03" variable="instances/abiotic_water/parameters/cThetaMinPOMW"/>
+  <!-- cThetaMinDOMW :: temperature coefficient of DOM mineralization (1/e^*C), default = 1.07 -->
+  <parameter file="fabm.yaml" maximum="1.07" minimum="1.03" variable="instances/abiotic_water/parameters/cThetaMinDOMW"/>
+  
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  <!-- Sediment domain parameters      -->
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  <!-- kDMinPOMS :: decomposition constant of POM-DW at 20*C (1/d), default = 0.003 -->
+  <parameter file="fabm.yaml" maximum="0.005" minimum="0.0005" variable="instances/abiotic_sediment/parameters/kDMinPOMS"/>
+  <!-- kDMinDOMS :: mineralization constant of DOM-DW at 20*C (1/d), default = 0.001 -->
+  <parameter file="fabm.yaml" maximum="0.005" minimum="0.0005" variable="instances/abiotic_sediment/parameters/kDMinDOMS"/>
+  <!-- cThetaMinDOMS :: temperature coefficient of DOM mineralization (1/e^*C), default = 1.06 -->
+  <parameter file="fabm.yaml" maximum="1.085" minimum="1.05" variable="instances/abiotic_sediment/parameters/cThetaMinDOMS"/>
+  <!-- cThetaMinPOMS :: temperature coefficient of POM mineralization (1/e^*C), default = 1.074 -->
+  <parameter file="fabm.yaml" maximum="1.075" minimum="1.05" variable="instances/abiotic_sediment/parameters/cThetaMinPOMS"/>
+  <!-- kO2Dif :: molecular O2 diffusion constant (m2/day), default = 2.6e-05 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_sediment/parameters/kO2Dif" minimum="0.00015" maximum="0.0002"/>
+  <!-- fRefrPOMS :: refractory fraction of sediment POM (-), default = 0.1 -->
+  <!-- <parameter file="fabm.yaml" variable="instances/abiotic_sediment/parameters/fRefrPOMS" minimum="0.1" maximum="0.25"/> -->
+  <!-- cTurbDifO2 :: bioturbation factor for oxygen diffusion (-), default = 5.0 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_sediment/parameters/cTurbDifO2" minimum="2.0" maximum="8.0"/>
+  
+  <!-- STEP 3: Calibration of nitrogen dynamics - focus nitrification and denitrificaiton rate parameters -->
+  <!-- take best parameter values from STEP 2, and give narrow range (e.g. plus/minus 10%) -->
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  <!-- Water column domain parameters  -->
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  <!-- kNMinPOMW :: decomposition constant for POM-N to DOM-N in water (day-1), default = 0.01 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_water/parameters/kNMinPOMW" minimum="0.01" maximum="0.05"/>
+  <!-- kNMinDOMW :: mineralization constant of DOM N (day-1), default = 0.01 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_water/parameters/kNMinDOMW" minimum="0.01" maximum="0.05"/>
+  <!-- kNitrW :: nitrification rate constant in water (day-1), default = 0.1 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_water/parameters/kNitrW" minimum="0.075" maximum="0.125"/>
+  <!-- hNO3DenitW :: quadratic half saturation NO3 conc. for denitrification (mgN/l), default = 2.0 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_water/parameters/hNO3DenitW" minimum="1.5" maximum="2.5"/>
+  <!-- hO2BOD :: half saturation oxygen conc. for BOD (mgO2/l), default = 1.0 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_water/parameters/hO2BOD" minimum="0.75" maximum="1.25"/>  
+  <!-- hO2Nitr ::  half saturation oxygen conc. for nitrification (mgO2/l), default = 2.0 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_water/parameters/hO2Nitr" minimum="1.5" maximum="2.5"/>  
+  <!-- NO3PerCW :: denitrified NO3 per mol C mineralised (molNO3), default = 0.8 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_water/parameters/NO3PerCW" minimum="0.8" maximum="1.0"/>
+  <!-- O2PerNH4W :: used O2 per mol NH4+ nitrified (molO2), default = 2.0 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_water/parameters/O2PerNH4W" minimum="2.0" maximum="2.6"/>  
+  <!-- cThetaNitrW :: temperature coefficient for nitrification in water ([-]), default = 1.08 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_water/parameters/cThetaNitrW" minimum="1.04" maximum="1.07"/>
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  <!-- Sediment domain parameters      -->
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  <!-- kNMinPOMS :: mineralization constant in sediment from POM-N to DOM-N (d-1), default = 0.002 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_sediment/parameters/kNMinPOMS" maximum="0.005" minimum="0.0005"/>
+  <!-- kNMinDOMS :: mineralization constant for sediment dissolved organic N (day-1), default = 0.002 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_sediment/parameters/kNMinDOMS" maximum="0.005" minimum="0.0005"/>
+  <!-- kNitrS ::  nitrification rate constant (d-1), default = 1.0 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_sediment/parameters/kNitrS" minimum="0.3" maximum="0.6"/> 
+  <!-- hNO3DenitS ::  quadratic half-sat. NO3 conc. for denitrification (mgN/l), default = 2.0 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_sediment/parameters/hNO3DenitS" minimum="0.70" maximum="1.25"/>  
+  <!-- O2PerNH4S ::  O2 used per mol NH4+ nitrified (mol), default = 2.0 -->
+  <!-- <parameter file="fabm.yaml" variable="instances/abiotic_sediment/parameters/O2PerNH4S" minimum="1.8" maximum="2.2"/>   -->
+  <!-- NO3PerCS ::  NO3 denitrified per mol C mineralised ([-]), default = 0.8 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_sediment/parameters/NO3PerCS" minimum="0.8" maximum="1.0"/> 
+  <!-- cThetaNitrS ::  temperature coefficient for nitrification ([-]), default = 1.08 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_sediment/parameters/cThetaNitrS" minimum="1.04" maximum="1.07"/>  
+  <!-- sNPOMS :: particulate organic N (g/m2), default = 0.6 g DW/m2 (top 10 cm of sediment) -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_sediment/initialization/sNPOMS" minimum="1.0" maximum="1.2"/>
+  <!-- sNHumS :: sediment humus N (g m-2), (top 10 cm of sediment), default = 166 -->
+  <parameter file="fabm.yaml" variable="instances/abiotic_sediment/initialization/sNHumS" minimum="25" maximum="50"/>
+  
+  
+  <!-- STEP 4 A: Calibration of hypolimnetic phosphorus dynamics - focus on sediment P release parameters --> 
+  <!-- take best parameter values from STEP 3, and give narrow range (e.g. plus/minus 10%) -->
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  <!-- Sediment domain parameters      -->
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  <!-- kPMinPOMS :: mineralization constant in sediment from POM-P to DOM-P (d-1), default = 0.002 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_sediment/parameters/kPMinPOMS" maximum="0.005" minimum="0.0005"/>
+  <!-- kPMinDOMS :: mineralization constant for sediment dissolved organic P (day-1), default = 0.002 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_sediment/parameters/kPMinDOMS" maximum="0.005" minimum="0.0005"/>  
+  <!-- kPSorp :: P sorption rate constant not too high -> model speed (d-1), default = 0.05 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_sediment/parameters/kPSorpS" minimum="0.01" maximum="0.05"/>
+  <!-- cRelPAdsD :: max. P adsorption per g DW (gP/gD), default = 3e-05 -->
+  <!-- <parameter file="fabm.yaml"                       variable="instances/abiotic_sediment/parameters/cRelPAdsDWS" minimum="0.000018" maximum="0.000042"/>   -->
+  <!-- cRelPAdsFe :: max. P adsorption per g Fe (gP/gFe), default = 0.065 -->
+  <!-- <parameter file="fabm.yaml"                       variable="instances/abiotic_sediment/parameters/cRelPAdsFeS" minimum="0.039" maximum="0.091"/> -->
+  <!-- fRedMax :: max. reduction factor of P adsorption affinity ([-]), default = 0.9 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_sediment/parameters/fRedMaxS" minimum="0.8" maximum="0.9"/>  
+  <!-- cKPAdsOxS :: P adsorption affinity at oxidized conditions (m3/gP), default = 0.6 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_sediment/parameters/cKPAdsOxS" minimum="1.5" maximum="2.5"/>
+  <!-- kPChemPO4 :: chem. PO4 loss rate (d-1), default = 0.03 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_sediment/parameters/kPChemPO4" minimum="0.018" maximum="0.02"/>  
+  <!-- coPO4Max :: max. SRP conc. in pore water (mgP/l), default = 1.0 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_sediment/parameters/coPO4Max" minimum="1.0" maximum="1.5"/>  
+  <!-- cThetaDif :: temperature coefficient for diffusion ([-]), default = 1.02 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_sediment/parameters/cThetaDif" minimum="1.02" maximum="1.04"/>  
+  <!-- fFeDIM :: Fe content of inorg. matter (gFe/gD), default = 0.01 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_sediment/parameters/fFeDIM" minimum="0.01" maximum="0.05"/>  
+  <!-- cTurbDifNut :: bioturbation factor for diffusion ([-]), default = 5.0 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_sediment/parameters/cTurbDifNut" minimum="10" maximum="20"/>  
+  
+  <!-- STEP 4 B: Calibration of hypolimnetic phosphorus dynamics - focus on sediment P release parameters --> 
+  <!-- take best parameter values from STEP 3, and give narrow range (e.g. plus/minus 10%) -->
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  <!-- Water column parameters      -->
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  <!-- kPMinPOMW :: decomposition constant for POM-P to DOM-P (day-1), default = 0.01 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_water/parameters/kPMinPOMW" minimum="0.01" maximum="0.05"/>
+  <!-- kPMinDOMW :: mineralization constant of dissolved organic P (day-1), default = 0.01 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_water/parameters/kPMinDOMW" minimum="0.01" maximum="0.05"/>
+  <!-- kPSorpW :: P sorption rate constant not too high -> model speed (d-1), default = 0.05, max = 1 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_water/parameters/kPSorpW" minimum="0.02" maximum="0.03"/>
+  <!-- cRelPAdsD :: max. P adsorption per g DW (gP/gD), default = 3e-05 -->
+  <!-- <parameter file="fabm.yaml"                       variable="instances/abiotic_water/parameters/cRelPAdsD" minimum="1e-05" maximum="5e-05"/>   -->
+  <!-- cRelPAdsFe :: max. P adsorption per g Fe (gP/gFe), default = 0.065 -->
+  <!-- <parameter file="fabm.yaml"                       variable="instances/abiotic_water/parameters/cRelPAdsFe" minimum="0.04" maximum="0.09"/> -->
+  <!-- fRedMaxW :: max. reduction factor of P adsorption affinity ([-]), default = 0.9 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_water/parameters/fRedMaxW" minimum="0.6" maximum="0.9"/>  
+  <!-- cKPAdsOxW :: P adsorption affinity at oxidized conditions (m3/gP), default = 0.6 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_water/parameters/cKPAdsOxW" minimum="0.6" maximum="1.1"/> 
+  <!-- fFeDIMW :: Fe content of inorg. matter (gFe/gD), default = 0.01 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_water/parameters/fFeDIMW" minimum="0.01" maximum="0.05"/> 
+  <!-- cVSetPOM :: maximum settling rate of POM (m/day), default = -0.25 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_water/parameters/cVSetPOM" minimum="-0.5" maximum="-0.1"/>
+  <!-- cVSedPOM :: POM sedimentation velocity constant at 20*C (m/d), default = 0.5 -->
+  <!-- <parameter file="fabm.yaml"                       variable="instances/abiotic_water/parameters/cVSedPOM" minimum="-0.5" maximum="-0.5"/> -->
+  <!-- cVSetIM :: maximum settling rate of iorganic matter (m/day), default = -1.0 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_water/parameters/cVSetIM" minimum="-1.25" maximum="-0.9"/>
+  
+  <!-- crt_shear :: critical shear stress (N m-2), default = 0.005 (likely low) -->
+  <parameter file="fabm.yaml" variable="instances/resus_sed/parameters/crt_shear" minimum="0.01" maximum="0.02"/>
+  <!-- kSiMinPaW :: decomposition constant for POM-Si to DOM-Si (day-1), default = 0.01 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_water/parameters/kSiMinPaW" minimum="0.01" maximum="0.05"/>
+  <!-- kSiMinPaS :: decomposition constant for POM-Si to DOM-Si (day-1), default = 0.01 -->
+  <parameter file="fabm.yaml"                       variable="instances/abiotic_sediment/parameters/kSiMinPaS" minimum="0.01" maximum="0.05"/>
+  
+  <!-- STEP 5: Calibration of nutrient and biology dynamics - focus on most sensitive parameters -->
+  <!-- take best parameter values from STEP 3, and give narrow range (e.g. plus/minus 10%) -->
+  <!-- sensitive parameters derived from Janse et al (2010) and Nielsen et al (2014)  -->
+  
+  <!-- Growth, Temperature and light phytoplankton parameters  -->
+  <!-- DIATOMS  -->
+  <!-- cMuMax :: maximum growth rate at 20*C (1/d), default = 1.4 -->
+  <parameter file="fabm.yaml" maximum="3.0" minimum="2.0" variable="instances/diatoms/parameters/cMuMax"/>
+  <!-- cTmOpt :: optimum temperature of growth rate (*C), default = 25.0 -->
+  <parameter file="fabm.yaml" maximum="20" minimum="17" variable="instances/diatoms/parameters/cTmOpt"/>
+  <!-- cSigTm :: growth rate temperature constant; sigma in Gaussian curve (*C), default = 11.6 -->
+  <parameter file="fabm.yaml" maximum="16" minimum="12" variable="instances/diatoms/parameters/cSigTm"/>
+  <!-- qLightMethod :: lightmethod 1=no photoinhibition; 2=photoinhibition (-), default = 2 -->
+  <parameter file="fabm.yaml" maximum="1" minimum="1" variable="instances/diatoms/parameters/qLightMethod"/>
+  <!-- hLRef :: half-sat. PAR at 20*C; Lehmann function; qLightMethod=1 (W/m2), default = 6.5 -->
+  <parameter file="fabm.yaml" maximum="6" minimum="4.0" variable="instances/diatoms/parameters/hLRef"/> 
+  <!-- cLOptRef :: optimum PAR at 20*C; Steele function; qLightMethod=2 (W/m2), default = 25.0 -->
+  <parameter file="fabm.yaml" maximum="15.0" minimum="8.0" variable="instances/diatoms/parameters/cLOptRef"/>
+  <!-- cVSet :: settling rate; NOTE: negative in case of sinking (m/d), default = 0.5 -->
+  <parameter file="fabm.yaml" maximum="-0.015" minimum="-0.35" variable="instances/diatoms/parameters/cVSet"/>
+  <!-- cVSed :: sedimentation velocity (m/d), default = 0.2 -->
+  <parameter file="fabm.yaml" maximum="0.35" minimum="0.015" variable="instances/diatoms/parameters/cVSed"/>
+  
+  <!-- CYANO  -->
+  <!-- cMuMax :: maximum growth rate at 20*C (1/d), default = 1.4 -->
+  <parameter file="fabm.yaml" maximum="1.5" minimum="0.5" variable="instances/cyanobacteria/parameters/cMuMax"/>
+  <!-- cSigTm :: growth rate temperature constant; sigma in Gaussian curve (*C), default = 11.6 -->
+  <parameter file="fabm.yaml" maximum="6.0" minimum="5.25" variable="instances/cyanobacteria/parameters/cSigTm"/>
+  <!-- cTmOpt :: optimum temperature of growth rate (*C), default = 25.0 -->
+  <parameter file="fabm.yaml" maximum="29.0" minimum="25.0" variable="instances/cyanobacteria/parameters/cTmOpt"/>
+  <!-- qLightMethod :: lightmethod 1=no photoinhibition; 2=photoinhibition (-), default = 2 -->
+  <parameter file="fabm.yaml" maximum="2" minimum="2" variable="instances/cyanobacteria/parameters/qLightMethod"/>
+  <!-- hLRef :: half-sat. PAR at 20*C; Lehmann function; qLightMethod=1 (W/m2), default = 34.0 -->
+  <!-- <parameter file="fabm.yaml" maximum="45" minimum="25" variable="instances/cyanobacteria/parameters/hLRef"/>  -->
+  <!-- cLOptRef :: optimum PAR at 20*C; Steele function; qLightMethod=2 (W/m2), default = 25.0 -->
+  <parameter file="fabm.yaml" maximum="35.0" minimum="10.0" variable="instances/cyanobacteria/parameters/cLOptRef"/>
+  <!-- cAffPUpt :: P uptake affinity (l/mgDW/d), default = 0.8 -->
+  <!-- <parameter file="fabm.yaml" maximum="0.9" minimum="0.7" variable="instances/cyanobacteria/parameters/cAffPUpt"/> -->
+  <!-- cAffNUpt :: N uptake affinity (l/mgDW/d), default = 0.2 -->
+  <!-- <parameter file="fabm.yaml" maximum="0.25" minimum="0.2" variable="instances/cyanobacteria/parameters/cAffNUpt"/> -->
+  
+  <!-- GREENS  -->
+  <!-- cMuMax :: maximum growth rate at 20*C (1/d), default = 1.4 -->
+  <parameter file="fabm.yaml" maximum="0.8" minimum="0.4" variable="instances/greens/parameters/cMuMax"/>
+  <!-- cTmOpt :: optimum temperature of growth rate (*C), default = 25.0 -->
+  <parameter file="fabm.yaml" maximum="25.0" minimum="23.0" variable="instances/greens/parameters/cTmOpt"/>
+  <!-- cSigTm :: growth rate temperature constant; sigma in Gaussian curve (*C), default = 11.6 -->
+  <parameter file="fabm.yaml" maximum="15.0" minimum="10.0" variable="instances/greens/parameters/cSigTm"/>
+  <!-- qLightMethod :: lightmethod 1=no photoinhibition; 2=photoinhibition (-), default = 2 -->
+  <parameter file="fabm.yaml" maximum="1" minimum="1" variable="instances/greens/parameters/qLightMethod"/>
+  <!-- hLRef :: half-sat. PAR at 20*C; Lehmann function; qLightMethod=1 (W/m2), default = 17.0 -->
+  <parameter file="fabm.yaml" maximum="25.0" minimum="10.0" variable="instances/greens/parameters/hLRef"/>  
+  <!-- cLOptRef :: optimum PAR at 20*C; Steele function; qLightMethod=2 (W/m2), default = 25.0 -->
+  <parameter file="fabm.yaml" maximum="50.0" minimum="40.0" variable="instances/greens/parameters/cLOptRef"/>
+  
+  <!-- Cyano movement parameters  -->
+  <!-- qTrans :: Taxis method (0=passive; 1=const.; 2=Nut. taxis; 3=Light taxis; 4=N&L) (-), default = 0 -->
+  <!-- <parameter file="fabm.yaml" maximum="4" minimum="4" variable="instances/cyanobacteria/parameters/qTrans"/> -->
+  <!-- cVSwim :: qVM > 0; vertical swimming speed (m/d), default = 0.1 -->
+  <!-- <parameter file="fabm.yaml" maximum="5" minimum="4" variable="instances/cyanobacteria/parameters/cVSwim"/> -->
+  <!-- fLVMmin :: qVM > 1; minimum detectable PAR level (W/m2), default = 0.025 -->
+  <!-- <parameter file="fabm.yaml" maximum="0.025" minimum="0.025" variable="instances/cyanobacteria/parameters/fLVMmin"/> -->
+  <!-- fNutLimVMdown :: qTrans > 3 or 4; threshold nut. limitation for downwards taxis (-), default = 0.675 -->
+  <!-- <parameter file="fabm.yaml" maximum="0.85" minimum="0.75" variable="instances/cyanobacteria/parameters/fNutLimVMdown"/> -->
+  <!-- fNutLimVMup :: qTrans > 2 or 4; threshold nut. limitation for upwards taxis (-), default = 0.75 -->
+  <!-- <parameter file="fabm.yaml" maximum="0.9" minimum="0.75" variable="instances/cyanobacteria/parameters/fNutLimVMup"/>  -->
+  
+  <!-- ZOOPLANKTON  -->
+  <!-- cladocerans  -->
+  <!-- cClearPrey1 :: clearance rate for prey 1 (diatoms) (m3/gDW/d), default = 2.0 -->
+  <parameter file="fabm.yaml" minimum="1.5" maximum="4.5" variable="instances/cladocerans/parameters/cClearPrey1"/>  
+  <!-- cClearPrey2 :: clearance rate for prey 1 (cyanobacteria) (m3/gDW/d), default = 2.0 -->
+  <parameter file="fabm.yaml" minimum="1.5" maximum="4.5" variable="instances/cladocerans/parameters/cClearPrey2"/>  
+  <!-- cClearPrey2 :: clearance rate for prey 2 (greens) (m3/gDW/d), default = 2.0 -->
+  <parameter file="fabm.yaml" minimum="1.5" maximum="4.5" variable="instances/cladocerans/parameters/cClearPrey3"/> 
+  <!-- cClearPrey4 :: clearance rate for prey 4 (POMW) (m3/gDW/d), default = 2.0 -->
+  <parameter file="fabm.yaml" minimum="1.0" maximum="2.5" variable="instances/cladocerans/parameters/cClearPrey4"/> 
+  <!-- fGutOccPrey1 :: gut occupation factor for prey 1 (-), default = 1.0 -->
+  <!-- <parameter file="fabm.yaml" minimum="1.0" maximum="2.5" variable="instances/cladocerans/parameters/fGutOccPrey1"/>   -->
+  <!-- fGutOccPrey2 :: gut occupation factor for prey 1 (-), default = 1.0 -->
+  <!-- <parameter file="fabm.yaml" minimum="1.5" maximum="2.5" variable="instances/cladocerans/parameters/fGutOccPrey2"/>  -->
+  <!-- fGutOccPrey2 :: gut occupation factor for prey 1 (-), default = 1.0 -->
+  <parameter file="fabm.yaml" minimum="1.5" maximum="2.5" variable="instances/cladocerans/parameters/fGutOccPrey2"/> 
+  <!-- fGutOccPrey3 :: gut occupation factor for prey 1 (-), default = 1.0 -->
+  <parameter file="fabm.yaml" minimum="1.5" maximum="5.0" variable="instances/cladocerans/parameters/fGutOccPrey4"/> 
+  <!-- kDConsMaxZoo :: standard dry weight specific maximum consumption rate(gDW/gDW/d), default = 0.5 -->
+  <parameter file="fabm.yaml" minimum="0.8" maximum="1.1" variable="instances/cladocerans/parameters/kDConsMaxZoo"/>
+  <!-- cTmOptZoo :: optimum temperature (*C), default = 22.0 -->
+  <parameter file="fabm.yaml" minimum="24" maximum="28" variable="instances/cladocerans/parameters/cTmOptZoo"/>
+  <!-- cSigTmZoo :: temperature constant; sigma in Gaussian curve (*C), default = 13.0 -->
+  <parameter file="fabm.yaml" minimum="10" maximum="12" variable="instances/cladocerans/parameters/cSigTmZoo"/> 
+  <!-- fDAssZoo :: dry weight assimilation efficiency (-), default = 0.35 -->
+  <parameter file="fabm.yaml" minimum="0.35" maximum="0.55" variable="instances/cladocerans/parameters/fDAssZoo"/>
+  <!-- fZooDOMW :: DOM fraction of dead individuals (-), default = 0.35 -->
+  <parameter file="fabm.yaml" minimum="0.05" maximum="0.3" variable="instances/cladocerans/parameters/fZooDOMW"/>
+  <!-- kMortZoo :: mortality rate(1/d), default = 0.04 -->
+  <parameter file="fabm.yaml" minimum="0.001" maximum="0.005" variable="instances/cladocerans/parameters/kMortZoo"/>
+  <!-- kDRespZoo :: maintenance respiration rate at 20*C(1/d), default = 0.2 -->
+  <parameter file="fabm.yaml" minimum="0.1" maximum="0.15" variable="instances/cladocerans/parameters/kDRespZoo"/>
+  
+  </parameters>
+  <observations>
+    <variable source="tempv.obs" modelpath="output.nc" modelvariable="temp" spinupyears = "5"/>
+    <variable source="do.obs" modelpath="output.nc" modelvariable="abiotic_water_sO2W" spinupyears = "5"/>
+    <variable source="no3.obs" modelpath="output.nc" modelvariable="abiotic_water_sNO3W" spinupyears = "5"/>
+    <variable source="nh4.obs" modelpath="output.nc" modelvariable="abiotic_water_sNH4W" spinupyears = "5" />
+    <variable source="po4.obs" modelpath="output.nc" modelvariable="abiotic_water_sPO4W" spinupyears = "5"/>
+    <variable source="tp.obs" modelpath="output.nc" modelvariable="wet_totP_calculator_result" spinupyears = "5" />
+    <variable source="tn.obs" modelpath="output.nc" modelvariable="wet_totN_calculator_result" spinupyears = "5" />
+    <variable source="chla.obs" modelpath="output.nc" modelvariable="wet_chla_calculator_result" spinupyears = "5" />
+    <variable source="cyano_chla.obs" modelpath="output.nc" modelvariable="cyanobacteria_oChla" spinupyears = "5" />
+    <variable source="diat_chla.obs" modelpath="output.nc" modelvariable="diatoms_oChla" spinupyears = "5" />
+  </observations>
+  <extra_outputs>
+	<statistic name="correlation" expression="corrcoef(x,y)[0,1]"/>
+	<statistic name="rmse" expression="sqrt(mean((y-x)**2))"/>
+	<statistic name="R2" expression="corrcoef(x,y)[0,1]**2"/>
+	<statistic name="pbias" expression="sum((y-x)*100)/sum(x)"/>
+  </extra_outputs>
+</config>

@@ -1,0 +1,51 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../client/config.xsd">
+  <transports>
+    <transport type="sqlite" path="LakeDashahe_step5.db"/>
+  </transports>
+  <executable path="../gotm_release.exe"/>
+  <setup path="../"/>
+  <parameters>
+  <!-- all steps include plus/minus 40% of the default value or based on user experience -->
+  <!-- be cautious of sediment initialization values -->
+  <!-- STEP 1A: Calibration of physical dynamics - TEMPERATURE -->
+  <!-- BIOSHADE IN GOTM.YAML = FALSE -->
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  <!-- Physical parameters             -->
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->  
+  <!-- wind speed in West-East direction @ 10 m -->
+  <parameter file="gotm.yaml"   variable="surface/meteo/u10/scale_factor" minimum="0.6" maximum="1.4"/>
+  <!-- wind speed in North-South direction @ 10 m -->
+  <parameter file="gotm.yaml"   variable="surface/meteo/v10/scale_factor" minimum="0.6" maximum="1.4"/>
+  <!-- shortwave radiation -->
+  <parameter file="gotm.yaml"   variable="surface/meteo/swr/scale_factor" minimum="0.6" maximum="1.4"/>
+  <!-- cloud cover, can be calibrated -->
+  <!-- <parameter file="gotm.yaml"   variable="surface/meteo/cloud/scale_factor" minimum="1.0" maximum="1.0"/> -->
+  <!-- minimum turbulent kinetic energy [m^2/s^2; min=0.0; default=1.00000000E-10] -->
+  <parameter file="gotm.yaml"   variable="turbulence/turb_param/k_min" minimum="1e-9" maximum="5e-7" logscale="True"/>
+  <!-- non-visible fraction of shortwave radiation [fraction; min=0.0; max=1.0; default=0.7] -->
+  <parameter file="gotm.yaml"   variable="light_extinction/A/constant_value" minimum="0.65" maximum="0.75"/>
+  <!-- e-folding depth of non-visible shortwave radiation [m; min=0.0; default=0.4] -->
+  <parameter file="gotm.yaml"   variable="light_extinction/g1/constant_value" minimum="0.30" maximum="0.5"/>
+  <!-- e-folding depth of visible shortwave radiation [m; min=0.0; default=8.0] -->
+  <parameter file="gotm.yaml"   variable="light_extinction/g2/constant_value" minimum="6.0" maximum="10.0"/>
+  
+  </parameters>
+  <observations>
+    <variable source="tempv.obs" modelpath="output.nc" modelvariable="temp" spinupyears = "5"/>
+    <!-- <variable source="do.obs" modelpath="output.nc" modelvariable="abiotic_water_sO2W" spinupyears = "5"/> -->
+    <!-- <variable source="no3.obs" modelpath="output.nc" modelvariable="abiotic_water_sNO3W" spinupyears = "5"/> -->
+    <!-- <variable source="nh4.obs" modelpath="output.nc" modelvariable="abiotic_water_sNH4W" spinupyears = "5" /> -->
+    <!-- <variable source="po4.obs" modelpath="output.nc" modelvariable="abiotic_water_sPO4W" spinupyears = "5"/> -->
+    <!-- <variable source="tp.obs" modelpath="output.nc" modelvariable="wet_totP_calculator_result" spinupyears = "5" /> -->
+    <!-- <variable source="tn.obs" modelpath="output.nc" modelvariable="wet_totN_calculator_result" spinupyears = "5" /> -->
+    <!-- <variable source="chla.obs" modelpath="output.nc" modelvariable="wet_chla_calculator_result" spinupyears = "5" /> -->
+    <!-- <variable source="cyano_chla.obs" modelpath="output.nc" modelvariable="cyanobacteria_oChla" spinupyears = "5" /> -->
+    <!-- <variable source="diat_chla.obs" modelpath="output.nc" modelvariable="diatoms_oChla" spinupyears = "5" /> -->
+  </observations>
+  <extra_outputs>
+	<statistic name="correlation" expression="corrcoef(x,y)[0,1]"/>
+	<statistic name="rmse" expression="sqrt(mean((y-x)**2))"/>
+	<statistic name="R2" expression="corrcoef(x,y)[0,1]**2"/>
+	<statistic name="pbias" expression="sum((y-x)*100)/sum(x)"/>
+  </extra_outputs>
+</config>
