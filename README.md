@@ -34,13 +34,13 @@ For our case study, we will work with the Chinese Shahe reservoir. Yiu can acces
 
 **PyNCView**
 
-To visualize model output with contour plots, we recommend using the software PyNCView.  We recommend you download PyNCView in Python via “pip install pyncview”. You can also download an installer (for Windows) at this page [pyncview-0.99.9.msi] (https://github.com/BoldingBruggeman/pyncview/releases) (under Assets).
+To visualize model output with contour plots, we recommend using the software PyNCView.  We recommend you download PyNCView in Python via “pip install pyncview”. You can also download an installer (for Windows) at this page [pyncview-0.99.9.msi](https://github.com/BoldingBruggeman/pyncview/releases) (under Assets).
 
 **parsac**
 
-parsac is a Python-based tool for sensitivity analysis and auto-calibration in parallel developed by Bolding&Bruggeman. It is designed for analysis of models that take significant time to run. To download parsac, you will need a Python working environment and can install via Python pip: “pip install parsac –user”. Parsac requires the Python package Parallel Python to parallelize the auto-calibration process. For more details on parsac and its installation, we recommend checking out [parsac's Github page] (https://github.com/BoldingBruggeman/parsac).
+parsac is a Python-based tool for sensitivity analysis and auto-calibration in parallel developed by Bolding&Bruggeman. It is designed for analysis of models that take significant time to run. To download parsac, you will need a Python working environment (we recommend using Python3 via [Anaconda distribution](https://www.anaconda.com/download/) ) and can install via Python pip: “pip install parsac –user”. parsac requires the Python package Parallel Python to parallelize the auto-calibration process and the Python package SALIb for sensitivity analysis. For more details on parsac and package dependencies look into the tutorials on auto-calibration and sensitivity analysis. You can also find more information on [parsac's Github page] (https://github.com/BoldingBruggeman/parsac).
 
-If you have problems installing the required software or downloading the case study, you are welcome to contact us. Or let us know by posting your challenge on the Issues board. 
+If you have problems installing the required software or downloading the case study, you are welcome to contact us by posting your challenge on the Issues board. 
 
 ## More resources
 **Water Ecosystems Tool (WET)**
