@@ -16,45 +16,55 @@ To participate in the hands-on part of the workshop, you will need to have a wor
 
 On day 1, we provide video tutorials on setting up, calibrating and running scenarios of GOTM-WET models with QWET. We therefore recommend bringing a headset, so you can work on the exercises while viewing the video tutorials by yourself.
 
-QGIS
+**QGIS**
+
 To run QWET you need to install QGIS3 64 bit version 3.16 or newer (available here: www.qgis.org). We recommend you install QGIS3 64 bit version 3.22 (QWET is currently tested up to version 3.36).
 
-QWET
-QWET is an open source QGIS plugin for application and user adaptation of the Water Ecosystems Tool (WET). The QWET installer and the QWET source code is available through Gitlab: https://u.pcloud.link/publink/show?code=XZsQLp0ZqyoHMg7pCvmO3pbUgJnRFYGLNhN7. We recommend you install QWET version 3.5.1. Please read the download instructions and watch the associated video tutorial on how to download the software: https://projects.au.dk/wet/resources 
+**QWET**
 
-GOTM-WET executables
-GOTM-WET executables are available to users with QWET download and installation. For users not interested in using QWET, GOTM-WET v2.1 executable for 64-bit Windows can be downloaded on the WET Zenodo repository.
+QWET is an open source QGIS plugin for application and user adaptation of the Water Ecosystems Tool (WET). The QWET installer and the QWET source code is available through here in the _Materials_ folder. The newest release of QWET (OCtober 2024, version 3.6) is compatible with the latest long term release of QGIS (version 3.34). Please read the download instructions and watch the associated video tutorial on how to download the software at: https://projects.au.dk/wet/resources
 
-Case study data for Shahe Reservoir
-For our case study, we will work with the Chinese Shahe reservoir. Signed-up participants will get access to the case study folder including files to configure a GOTM-WET model to Shahe Reservoir with QWET with lake specific hypsography and inflow and weather forcing as well as in-lake observations and files with calibrated parameters.
+_GOTM-WET executables_
 
-PyNCView
-To visualize model output with contour plots, we recommend using the software PyNCView. You can download an installer (for Windows) at this page (pyncview-0.99.9.msi): https://github.com/BoldingBruggeman/pyncview/releases (under Assets). You can also download PyNCView in Python via “pip install pyncview”.
+GOTM-WET executables are available to users with QWET download and installation. For users not interested in using QWET, GOTM-WET v2.1 executable for 64-bit Windows can be downloaded on the [WET Zenodo repository](https://doi.org/10.5281/zenodo.13841743).
 
-parsac
-parsac is a Python-based tool for sensitivity analysis and auto-calibration in parallel developed by Bolding&Bruggeman. It is designed for analysis of models that take significant time to run. To download parsac, you will need a Python working environment and can install via Python pip: “pip install parsac –user”. Parsac requires the Python package Parallel Python to parallelize the auto-calibration process. For more details on parsac and its installation, we recommend checking out its Github page: https://github.com/BoldingBruggeman/parsac.
+**Case study data for Shahe Reservoir**
 
-If you have problems installing the required software or downloading the case study, you are welcome to contact us. 
+For our case study, we will work with the Chinese Shahe reservoir. Yiu can access to the case study folder including files to configure a GOTM-WET model to Shahe Reservoir with QWET with lake specific hypsography and inflow and weather forcing as well as in-lake observations and files with calibrated parameters in the _Materials_ folder.
+
+**PyNCView**
+
+To visualize model output with contour plots, we recommend using the software PyNCView.  We recommend you download PyNCView in Python via “pip install pyncview”. You can also download an installer (for Windows) at this page [pyncview-0.99.9.msi] (https://github.com/BoldingBruggeman/pyncview/releases) (under Assets).
+
+**parsac**
+
+parsac is a Python-based tool for sensitivity analysis and auto-calibration in parallel developed by Bolding&Bruggeman. It is designed for analysis of models that take significant time to run. To download parsac, you will need a Python working environment and can install via Python pip: “pip install parsac –user”. Parsac requires the Python package Parallel Python to parallelize the auto-calibration process. For more details on parsac and its installation, we recommend checking out [parsac's Github page] (https://github.com/BoldingBruggeman/parsac).
+
+If you have problems installing the required software or downloading the case study, you are welcome to contact us. Or let us know by posting your challenge on the Issues board. 
 
 ## More resources
-Water Ecosystems Tool (WET)
+**Water Ecosystems Tool (WET)**
+
 WET is a further development of FABM-PCLake by Hu et al., at Aarhus University, Denmark. Key features originate from the PCLake aquatic ecosystem model by Janse and van Liere (1995), but key features and inspiration from CAEDYM and Ecopath/Ecosim has also been implemented.  WET can describe interactions between multiple trophic levels and abiotic nutrient dynamics in both the water column and the sediment. The model accounts for the dynamics of dry weight, nitrogen, phosphorous, silica and oxygen, and features bottom-shear-dependent resuspension, as well as two different light-limitation functions for phytoplankton. WET is also implemented within the FABM framework, allowing the model to be coupled to various physical driver models, e.g. GOTM (1D, Burchard et al., 1999) or GETM (3D, e.g. Stips et al., 2004), without changing any of the model code. 
 For introduction to WET, we refer you to the scientific articles:
 
-Schnedler-Meyer, N. A., Andersen, T. K., Hu, F. R. S., Bolding, K., Nielsen, A., & Trolle, D. (2022) Water Ecosystems Tool (WET) 1.0 – a new generation of flexible aquatic ecosystem model. Geoscientific Model Development
+Schnedler-Meyer, N. A., Andersen, T. K., Hu, F. R. S., Bolding, K., Nielsen, A., & Trolle, D. (2022) Water Ecosystems Tool (WET) 1.0 – a new generation of flexible aquatic ecosystem model. [Geoscientific Model Development](https://doi.org/10.5194/gmd-15-3861-2022)
 
-Schnedler-Meyer, N. A., & Andersen, T. K. (2024) Dining in danger: Resolving adaptive fish behavior increases realism of modeled ecosystem dynamics. Ecology and Evolution
+Schnedler-Meyer, N. A., & Andersen, T. K. (2024) Dining in danger: Resolving adaptive fish behavior increases realism of modeled ecosystem dynamics. [Ecology and Evolution](https://doi.org/10.1002/ECE3.70020)
 
-General Ocean Turbulence Model (GOTM)
+**General Ocean Turbulence Model (GOTM)**
+
 Most commonly WET is coupled to the lake branch of 1D hydrodynamic model GOTM (source code available at https://gitlab.com/wateritech-public/waterecosystemstool/gotm). For details on lake branch GOTM, see the models Gitlab page. For more information on GOTM in general, check out https://gotm.net/portfolio/. 
 
 For a brief description of GOTM and how it compares to other 1D hydrodynamic models, we recommend
-Feldbauer, J., Mesman, J.P., Andersen, T.K., Ladwig, R. (under review) Learning from a large-scale calibration effort of multiple lake models. Preprint egusphere-2024-2447
+Feldbauer, J., Mesman, J.P., Andersen, T.K., Ladwig, R. (under review) Learning from a large-scale calibration effort of multiple lake models. [Preprint egusphere-2024-2447](https://doi.org/10.5194/egusphere-2024-2447)
 
-Framework of Aquatic Biogeochemical Models (FABM)
-The Framework for Aquatic Biogeochemical Models (FABM, developed by Bolding & Bruggeman) allows coupling a biogeochemical model to a wide variety of hydrodynamic models in 0D, 1D, 2D or 3D, without changing any model code, and encourages and supports modularization of ecosystem models. For more details, we refer you to FABMS wiki page https://github.com/fabm-model/fabm/wiki.
+**Framework of Aquatic Biogeochemical Models (FABM)**
 
-Model study on the Shahe Reservoir
+The Framework for Aquatic Biogeochemical Models (FABM, developed by Bolding & Bruggeman) allows coupling a biogeochemical model to a wide variety of hydrodynamic models in 0D, 1D, 2D or 3D, without changing any model code, and encourages and supports modularization of ecosystem models. For more details, we refer you to [FABMS wiki page] (https://github.com/fabm-model/fabm/wiki).
+
+**Model study on the Shahe Reservoir**
+
 You can find more information on the model study of Shahe Reservoir, which this workshop is based around, in the paper
 
-Cui, Y., Zhu, G., Li, H., Luo, L., Cheng, X., Jin, Y., & Trolle, D. (2016). Modeling the response of phytoplankton to reduced external nutrient load in a subtropical Chinese reservoir using DYRESM-CAEDYM. Lake and Reservoir Management, 32(2), 146–157. 
+Cui, Y., Zhu, G., Li, H., Luo, L., Cheng, X., Jin, Y., & Trolle, D. (2016). Modeling the response of phytoplankton to reduced external nutrient load in a subtropical Chinese reservoir using DYRESM-CAEDYM. [Lake and Reservoir Management](https://doi.org/10.1080/10402381.2015.1136365), 32(2), 146–157. 
