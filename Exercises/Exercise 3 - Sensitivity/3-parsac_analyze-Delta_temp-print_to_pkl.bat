@@ -1,0 +1,1 @@
+C:\Users\tkan\AppData\Local\anaconda3\Scripts\parsac sensitivity analyze --pickle C:\Users\tkan\Model_setups\lake_shahe_workshop\parsac\delta_temp_SA_results.pkl C:\Users\tkan\Model_setups\lake_shahe_workshop\parsac\delta_temp_n50.pkl delta 

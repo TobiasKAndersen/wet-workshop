@@ -1,0 +1,1 @@
+C:\Users\tkan\AppData\Local\anaconda3\Scripts\parsac sensitivity sample C:\Users\tkan\Model_setups\lake_shahe_workshop\parsac\wet_dashahe-step1-SA.xml C:\Users\tkan\Model_setups\lake_shahe_workshop\parsac\delta_temp_n50.pkl latin 50
