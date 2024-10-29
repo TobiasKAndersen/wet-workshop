@@ -9,7 +9,7 @@ On this page, you will find materials, lectures, exercises and tutorials to trai
 
 The software used has been developed for Windows computers, and participants therefore need a Windows computer to be able to follow the hands-on exercise.
 
-The workshop takes place on 14 to 16 October 2023 at NIGLAS, Nanjing, China.
+The workshop took place on 14 to 16 October 2023 at NIGLAS, Nanjing, China. In the workshop agenda is a full description of the workshop and the materials needed to complete the workshop.
 
 ## Workshop materials
 To participate in the hands-on part of the workshop, you will need to have a working version of QGIS and the graphical user interface QWET. If you are a Mac user, we highly recommend you apply a windows-partition on your system, as the QWET installer is only available in windows format.
