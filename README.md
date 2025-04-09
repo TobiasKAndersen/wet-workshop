@@ -1,30 +1,45 @@
-## The **Water Ecosystems Tool (WET)** model workshop
+# The **Water Ecosystems Tool (WET)** model workshop
+---
 
-On this page, you will find materials, lectures, exercises and tutorials to train and support your application of Water Ecosystems Tool (WET). This workshop trains participants in the theory and practical application of WET coupled to the 1D hydrodynamic model General Ocean Turbulence Model (GOTM). The workshop covers the theory behind as well as model development of the lake models PCLake and WET. Through combined lectures and hands-on exercises on participants own computers, participants will learn how to
+🗓️ April 11-14 2025
+🗺️ Yunnan University, Kunming, China
+👥 Tobias Kuhlmann Andersen & Xiangzhen Kong
+
+--- 
+
+On this page, you will find materials, lectures, exercises and tutorials to train and support your application of Water Ecosystems Tool (WET). This workshop train participants in the process of setting up and running a GOTM-WET model of WET coupled to the 1D hydrodynamic model General Ocean Turbulence Model (GOTM). The workshop also covers the theory behind as well as model development and evaluation of the lake models PCLake and WET. 
+
+## Learning objective
+Through combined lectures and hands-on exercises on participants own computers, participants will learn how to
 *	Set-up a GOTM-WET lake model via the QGIS interface QWET
 *	Manual calibration and scenario executions with GOTM-WET models
 *	Auto-calibration and sensitivity analysis of WET models with parsac
-*	Compile GOTM-FABM-WET executable from source code
+*	Configure WET food web to mimic different ecosystem structures
+*	Perform GOTM-WET manipulations to simulate lake restoration measures
 *	Contribute to the development of WET modules
 
-The software used has been developed for Windows computers, and participants therefore need a Windows computer to be able to follow the hands-on exercise.
-
-The workshop took place on 14 to 16 October 2023 at NIGLAS, Nanjing, China. In the workshop agenda is a full description of the workshop and the materials needed to complete the workshop.
+## Workshop agenda
+In the workshop agenda is a full description of the workshop and the materials needed to complete the workshop.
 
 ## Workshop materials
-To participate in the hands-on part of the workshop, you will need to have a working version of QGIS and the graphical user interface QWET. If you are a Mac user, we highly recommend you apply a windows-partition on your system, as the QWET installer is only available in windows format.
+To participate in the hands-on part of the workshop, you will need to have a working version of QGIS and the graphical user interface QWET. 
+The software used has been developed for Windows computers, and participants therefore need a Windows computer to be able to follow the hands-on exercises. If you are a Mac user, we highly recommend you apply a windows-partition on your system, as the QWET installer is only available in windows format.
 
 On day 1, we provide video tutorials on setting up, calibrating and running scenarios of GOTM-WET models with QWET. We therefore recommend bringing a headset, so you can work on the exercises while viewing the video tutorials by yourself.
 
 **QGIS**
 
-To run QWET you need to install QGIS3 64 bit version 3.16 or newer (available here: www.qgis.org). We recommend you install QGIS3 64 bit version 3.22 (QWET is currently tested up to version 3.36).
+To run QWET you need to install QGIS3 64 bit version 3.16 or newer (available here: www.qgis.org). We recommend you install QGIS3 64 bit version 3.34 (QWET is currently tested up to version 3.36).
 
 **QWET**
 
-QWET is an open source QGIS plugin for application and user adaptation of the Water Ecosystems Tool (WET). The QWET installer is available here:
+QWET is an open source QGIS plugin for application and user adaptation of the Water Ecosystems Tool (WET). 
+
+The QWET installer is available here:
+
 https://u.pcloud.link/publink/show?code=XZmiT30ZoYEwVCHw4Lu2u1lwUqExT7wdT1Dk 
-The newest release of QWET (OCtober 2024, version 3.6) is compatible with the latest long term release of QGIS (version 3.34). 
+
+The newest release of QWET (October 2024, version 3.6) is compatible with the long term release of QGIS version 3.34. 
 Make sure that you have internet connection when installing QWET as QWET installs Python site packages on your QGIS python environment.
 To enable QWET in QGIS, select Plugins in the top menu in QGIS and select “Manage and Install Plugins”. Then, a pop-up window will appear, find QWET and tick of the box next to QWET. Now a QWET logo will appear QGIS panel. Enabling QWET is also demonstrated in the video tutorials.
 
@@ -34,7 +49,7 @@ GOTM-WET executables are available to users with QWET download and installation.
 
 **Case study data for Shahe Reservoir**
 
-For our case study, we will work with the Chinese Shahe reservoir. Yiu can access to the case study folder including files to configure a GOTM-WET model to Shahe Reservoir with QWET with lake specific hypsography and inflow and weather forcing as well as in-lake observations and files with calibrated parameters in the _Materials_ folder.
+For our case study, we will work with the Chinese Shahe reservoir. You can access to the case study folder including files to configure a GOTM-WET model to Shahe Reservoir with QWET with lake specific hypsography and inflow and weather forcing as well as in-lake observations and files with calibrated parameters in the _Materials_ folder.
 
 **PyNCView**
 
