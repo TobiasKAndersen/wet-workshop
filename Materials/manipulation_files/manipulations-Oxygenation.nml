@@ -1,0 +1,22 @@
+&manipulation
+   start = '2003-06-23 00:00:00',			! When to start the manipulation
+   stop = '2003-07-04 23:59:59',			! When to stop the manipulation
+   name = 'abiotic_water_sO2W',				! Variable name to target for manipulation
+   action_type = 2,							! The specification of the action type (1 = instant multiplier, 2 = addition by rate)
+   action = 23.15, 							! The action value (multiplier if action_type = 1, or rate (e.g. g/sec) if action_type = 2)
+   threshold = 6.0,							! Only apply action if below this value - only used for action_type=2
+   kstart = 1,								! Bottom layer with manipulation (most bottom layer is 1)
+   kstop = 15,								! Top layer with manipulation
+   verbose = .true.							! If true, print manipulation to console
+/
+&manipulation
+   start = '2003-07-05 00:00:00',			! When to start the manipulation
+   stop = '2003-07-31 23:59:59',			! When to stop the manipulation
+   name = 'abiotic_water_sO2W',				! Variable name to target for manipulation
+   action_type = 2,							! The specification of the action type (1 = instant multiplier, 2 = addition by rate)
+   action = 75.23,							! The action value (multiplier if action_type = 1, or rate (e.g. g/sec) if action_type = 2)
+   threshold = 6.0,							! Only apply action if below this value - only used for action_type=2
+   kstart = 1,								! Bottom layer with manipulation (most bottom layer is 1)
+   kstop = 15,								! Top layer with manipulation
+   verbose = .true.							! If true, print manipulation to console
+/

@@ -1,6 +1,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../client/config.xsd">
   <transports>
-    <transport type="sqlite" path="LakeDashahe_step5.db"/>
+    <transport type="sqlite" path="LakeDashahe_step1.db"/>
   </transports>
   <executable path="../gotm_release.exe"/>
   <setup path="../"/>

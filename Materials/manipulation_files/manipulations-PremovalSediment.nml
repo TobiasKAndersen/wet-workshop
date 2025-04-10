@@ -1,0 +1,39 @@
+&manipulation
+   start = '2020-04-01 00:00:00',			! When to start the manipulation
+   name = 'abiotic_sediment_sPAIMS',		! Variable name to target for manipulation
+   action_type = 1,							! The specification of the action type (1 = instant multiplier, 2 = addition by rate)
+   action = 0.50,							! The action value (multiplier if action_type = 1, or rate (e.g. g/sec) if action_type = 2)
+   verbose = .true.							! If true, print manipulation to console
+/
+
+&manipulation
+   start = '2020-04-01 00:00:00',			! When to start the manipulation
+   name = 'abiotic_sediment_sPDOMS',		! Variable name to target for manipulation
+   action_type = 1,							! The specification of the action type (1 = instant multiplier, 2 = addition by rate)
+   action = 0.50,							! The action value (multiplier if action_type = 1, or rate (e.g. g/sec) if action_type = 2)
+   verbose = .true.							! If true, print manipulation to console
+/
+
+&manipulation
+   start = '2020-04-01 00:00:00',			! When to start the manipulation
+   name = 'abiotic_sediment_sPHumS',		! Variable name to target for manipulation
+   action_type = 1,							
+   action = 0.50,							! The action value (multiplier if action_type = 1, or rate (e.g. g/sec) if action_type = 2)
+   verbose = .true.							! If true, print manipulation to console
+/
+
+&manipulation
+   start = '2020-04-01 00:00:00',			! When to start the manipulation
+   name = 'abiotic_sediment_sPPOMS',		! Variable name to target for manipulation
+   action_type = 1,							! The specification of the action type (1 = instant multiplier, 2 = addition by rate)
+   action = 0.50,							! The action value (multiplier if action_type = 1, or rate (e.g. g/sec) if action_type = 2)
+   verbose = .true.							! If true, print manipulation to console
+/
+
+&manipulation
+   start = '2020-04-01 00:00:00',			! When to start the manipulation
+   name = 'abiotic_sediment_sPPOMS_PV',		! Variable name to target for manipulation
+   action_type = 1,							! The specification of the action type (1 = instant multiplier, 2 = addition by rate)
+   action = 0.50,							! The action value (multiplier if action_type = 1, or rate (e.g. g/sec) if action_type = 2)
+   verbose = .true.							! If true, print manipulation to console
+/
